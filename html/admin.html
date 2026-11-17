@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de administración</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Panel de administración</h1>
+        <button id="cerrar-sesion">Cerrar sesión</button>
+    </header>
+
+    <main>
+        <h2>Bienvenido, administrador</h2>
+
+        <section>
+            <h3>Gestión de productos</h3>
+            <p>Acá vamos a poder agregar, modificar y eliminar productos.</p>
+        </section>
+
+        <section>
+            <h3>Gestión de pedidos</h3>
+            <p>Acá vamos a poder consultar los pedidos realizados.</p>
+        </section>
+
+    </main>
+
+    <script>
+    function verificarSesion() {
+        const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
+
+        if (!usuario || usuario.role !== "ADMIN") {
+            window.location.replace("login.html");
+        }
+    }
+
+    verificarSesion();
+
+    window.addEventListener("pageshow", verificarSesion);
+
+    document.getElementById("cerrar-sesion").addEventListener("click", function() {
+        localStorage.removeItem("usuarioActual");
+        window.location.replace("login.html");
+    });
+</script>
+
+</body>
+</html>
