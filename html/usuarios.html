@@ -365,41 +365,36 @@
             <div class="row">
               <div class="col-12">
                 <!--centro del panel CELESTE-->
-                <!-- Resumen de la tienda -->
-                <div class="row">
-
-                  <div class="col-lg-4 col-12">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5>Productos registrados</h5>
-                        <h2 id="total-productos">0</h2>
-                        <p class="text-muted mb-0">Productos en el catálogo</p>
-                      </div>
+                <!-- Gestión de usuarios -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Usuarios registrados</h3>
                     </div>
-                  </div>
 
-                  <div class="col-lg-4 col-12">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5>Pedidos pendientes</h5>
-                        <h2 id="total-pedidos">0</h2>
-                        <p class="text-muted mb-0">Pedidos por gestionar</p>
-                      </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Correo electrónico</th>
+                                        <th>Rol</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tabla-usuarios">
+                                    <tr>
+                                        <td colspan="4" class="text-center">
+                                            Cargando usuarios...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                  </div>
-
-                  <div class="col-lg-4 col-12">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5>Usuarios registrados</h5>
-                        <h2 id="total-usuarios">0</h2>
-                        <p class="text-muted mb-0">Clientes de la tienda</p>
-                      </div>
-                    </div>
-                  </div>
-
                 </div>
-                <!-- Fin del resumen -->
+                <!-- Fin gestión de usuarios -->
                 <!--centro del panel CELESTE-->
               </div>
               <!-- /.col -->

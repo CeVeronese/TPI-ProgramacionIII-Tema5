@@ -46,6 +46,17 @@
         window.location.replace("login.html");
     });
 </script>
+    <script>
+        const usuario = JSON.parse(localStorage.getItem("usuarioActual"));
 
+        if (!usuario || usuario.role !== "admin") {
+            window.location.href = "../index.html";
+        }
+
+        function cerrarSesion() {
+            localStorage.removeItem("usuarioActual");
+            window.location.href = "../index.html";
+        }
+    </script>
 </body>
 </html>
