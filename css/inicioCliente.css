@@ -1,0 +1,14 @@
+[data-bs-theme="dark"] .app-content h1,
+[data-bs-theme="dark"] .app-content h2,
+[data-bs-theme="dark"] .app-content p,
+[data-bs-theme="dark"] .app-content-header h1,
+[data-bs-theme="dark"] .app-content-header p {
+    color: white;
+}
+[data-bs-theme="light"] .app-content h1,
+[data-bs-theme="light"] .app-content h2,
+[data-bs-theme="light"] .app-content p,
+[data-bs-theme="light"] .app-content-header h1,
+[data-bs-theme="light"] .app-content-header p {
+    color: #212529;
+}
