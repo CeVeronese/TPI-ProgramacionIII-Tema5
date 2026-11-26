@@ -369,34 +369,63 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Usuarios registrados</h3>
+                        <button class="btn btn-primary float-end" onclick="mostrarFormularioUsuario()">
+                            <i class="bi bi-person-plus me-1"></i>
+                            Agregar usuario
+                        </button>
                     </div>
 
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre</th>
-                                        <th>Correo electrónico</th>
-                                        <th>Rol</th>
-                                    </tr>
-                                </thead>
+                    <div id="formulario-usuario" style="display: none;" class="mb-4">
+                        <h4>Nuevo usuario</h4>
 
-                                <tbody id="tabla-usuarios">
-                                    <tr>
-                                        <td colspan="4" class="text-center">
-                                            Cargando usuarios...
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <form id="form-usuario">
+                            <div class="mb-3">
+                                <label for="nombre-usuario" class="form-label">Nombre</label>
+                                <input type="text" id="nombre-usuario" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email-usuario" class="form-label">Correo electrónico</label>
+                                <input type="email" id="email-usuario" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password-usuario" class="form-label">Contraseña</label>
+                                <input type="password" id="password-usuario" class="form-control" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Guardar usuario</button>
+                            <button type="button" class="btn btn-secondary" onclick="ocultarFormularioUsuario()">Cancelar</button>
+                        </form>
                     </div>
-                </div>
-                <!-- Fin gestión de usuarios -->
-                <!--centro del panel CELESTE-->
-              </div>
+
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Nombre</th>
+                              <th>Correo electrónico</th>
+                              <th>Rol</th>
+                              <th>Acciones</th>
+                            </tr>
+                          </thead>
+                          
+                          <tbody id="tabla-usuarios">
+                            <tr>
+                              <td colspan="5" class="text-center">
+                                Cargando usuarios...
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Fin gestión de usuarios -->
+                  <!--centro del panel CELESTE-->
+                  </div>
               <!-- /.col -->
             </div>
             <!--end::Row-->
@@ -443,7 +472,7 @@
     <!--cargar archivos externos CELESTE-->
     <script src="../js/adminlte.js"></script>
     <script src="../js/config.js"></script>
-    <script src="../js/resumenAdmin.js"></script>
+    <script src="../js/adminUsuarios.js"></script>
     <!--cargar archivos externos CELESTE-->
 
     <!--begin::OverlayScrollbars Configure-->

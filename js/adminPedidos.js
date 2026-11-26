@@ -4,56 +4,6 @@ async function cargarPedidosAdmin() {
     const tabla = document.getElementById("tabla-pedidos");
 
     try {
-        const respuesta = await fetch(`${API_ORDERS}/orders`);
-
-        if (!respuesta.ok) {
-            throw new Error("Error al obtener pedidos");
-        }
-
-        const pedidos = await respuesta.json();
-        listaPedidos = pedidos;
-
-        tabla.innerHTML = "";
-
-        pedidos.forEach(pedido => {
-            const fila = document.createElement("tr");
-
-            fila.innerHTML = `
-                <td>${pedido.id}</td>
-                <td>${pedido.userId}</td>
-                <td>$${pedido.total}</td>
-                <td>
-                    <select class="form-select" onchange="cambiarEstado('${pedido.id}', this.value)">
-                        <option value="Pendiente" ${pedido.estado === "Pendiente" ? "selected" : ""}>Pendiente</option>
-                        <option value="En preparación" ${pedido.estado === "En preparación" ? "selected" : ""}>En preparación</option>
-                        <option value="Entregado" ${pedido.estado === "Entregado" ? "selected" : ""}>Entregado</option>
-                    </select>
-                </td>
-                <td>${pedido.fecha}</td>
-                <td>-</td>
-            `;
-
-            tabla.appendChild(fila);
-        });
-
-    } catch (error) {
-        console.error("Error:", error);
-
-        tabla.innerHTML = `
-            <tr>
-                <td colspan="5" class="text-center">
-                    No se pudieron cargar los pedidos.
-                </td>
-            </tr>
-        `;
-    }
-}
-
-
-async function cargarPedidosAdmin() {
-    const tabla = document.getElementById("tabla-pedidos");
-
-    try {
         const respuestaPedidos = await fetch(`${API_ORDERS}/orders`);
         const respuestaUsuarios = await fetch(`${API_USERS_PRODUCTS}/users`);
 
@@ -79,7 +29,7 @@ async function cargarPedidosAdmin() {
 
         pedidos.forEach(pedido => {
             const usuario = usuarios.find(
-                user => user.id === String(pedido.userId)
+                user => String(user.id) === String(pedido.userId)
             );
 
             const nombreUsuario = usuario
@@ -210,4 +160,47 @@ async function eliminarPedido(id) {
         console.error("Error:", error);
         alert("No se pudo eliminar el pedido");
     }
+}
+
+async function cambiarEstado(id, nuevoEstado) {
+    try {
+        const respuesta = await fetch(`${API_ORDERS}/orders/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                estado: nuevoEstado
+            })
+        });
+
+        if (!respuesta.ok) {
+            throw new Error("No se pudo cambiar el estado");
+        }
+
+        alert("Estado actualizado correctamente");
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("No se pudo cambiar el estado");
+    }
+}
+
+function filtrarPedidos() {
+    const filtro = document.getElementById("filtroEstado").value;
+    const filas = document.querySelectorAll("#tabla-pedidos tr");
+
+    filas.forEach(fila => {
+        const selectEstado = fila.querySelector("select");
+
+        if (!selectEstado) {
+            return;
+        }
+
+        if (filtro === "Todos" || selectEstado.value === filtro) {
+            fila.style.display = "";
+        } else {
+            fila.style.display = "none";
+        }
+    });
 }
