@@ -18,7 +18,7 @@ async function iniciarSesion(email, password) {
             if (usuario.role === "ADMIN") {
                 window.location.href = "admin2.html"; 
             } else {
-                window.location.href = "catalogo.html";
+                window.location.href = "inicioCliente.html";
             }
 
         } else {
