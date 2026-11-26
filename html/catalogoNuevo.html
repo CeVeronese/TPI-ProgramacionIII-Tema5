@@ -134,31 +134,64 @@
               </a>
             </li>
 
-            <!-- Selector de Modo de Color -->
+          <!--begin::Cambiar el tema (#6010)-->
             <li class="nav-item dropdown">
-              <a class="nav-link" href="#" id="bd-theme" aria-label="Cambiar esquema de color" data-bs-toggle="dropdown" aria-expanded="false">
+              <a
+                class="nav-link"
+                href="#"
+                id="bd-theme"
+                aria-label="Toggle color scheme"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 <i class="bi bi-sun-fill" data-lte-theme-icon="light"></i>
                 <i class="bi bi-moon-fill d-none" data-lte-theme-icon="dark"></i>
                 <i class="bi bi-circle-half d-none" data-lte-theme-icon="auto"></i>
               </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme" style="--bs-dropdown-min-width: 8rem">
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="bd-theme"
+                style="--bs-dropdown-min-width: 8rem"
+              >
                 <li>
-                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
-                    <i class="bi bi-sun-fill me-2"></i> Claro
+                  <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center"
+                    data-bs-theme-value="light"
+                    aria-pressed="false"
+                  >
+                    <i class="bi bi-sun-fill me-2"></i>
+                    Claro
+                    <i class="bi bi-check-lg ms-auto d-none"></i>
                   </button>
                 </li>
                 <li>
-                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
-                    <i class="bi bi-moon-fill me-2"></i> Oscuro
+                  <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center"
+                    data-bs-theme-value="dark"
+                    aria-pressed="false"
+                  >
+                    <i class="bi bi-moon-fill me-2"></i>
+                    Oscuro
+                    <i class="bi bi-check-lg ms-auto d-none"></i>
                   </button>
                 </li>
                 <li>
-                  <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
-                    <i class="bi bi-circle-half me-2"></i> Automático
+                  <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center active"
+                    data-bs-theme-value="auto"
+                    aria-pressed="true"
+                  >
+                    <i class="bi bi-circle-half me-2"></i>
+                    Auto
+                    <i class="bi bi-check-lg ms-auto d-none"></i>
                   </button>
                 </li>
               </ul>
             </li>
+            <!--end::Cambiar el tema-->
 
             <!-- Botón de Cerrar Sesión -->
             <li class="nav-item">
@@ -225,8 +258,8 @@
           </nav>
         </div>
       </aside>
-
       <!--end::Sidebar-->
+
       <!--begin::App Main-->
       <main class="app-main">
         <!--begin::App Content Header-->
@@ -245,20 +278,8 @@
         </div>
       </main>
       <!--end::App Main-->
-      <!--begin::Footer-->
-      <footer class="app-footer">
-        <!--begin::To the end-->
-        <div class="float-end d-none d-sm-inline">Anything you want</div>
-        <!--end::To the end-->
-        <!--begin::Copyright-->
-        <strong>
-          Copyright &copy; 2014-2026&nbsp;
-          <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
-        </strong>
-        All rights reserved.
-        <!--end::Copyright-->
-      </footer>
-      <!--end::Footer-->
+
+
     </div>
     <!--end::App Wrapper-->
     <!--begin::Script-->
@@ -277,12 +298,7 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.min.js"
       crossorigin="anonymous"
     ></script>
-    <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src="../js/adminlte.js"></script>
-    <script src="../js/config.js"></script>
-    <script src="../js/carrito.js"></script>
-    <script src="../js/productos.js"></script>
-    <!--end::Required Plugin(AdminLTE)-->
+  
     <!--begin::OverlayScrollbars Configure-->
     <script>
       const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
@@ -312,15 +328,15 @@
         }
       });
     </script>
-    <!--end::OverlayScrollbars Configure-->
-
-    <!--begin::Color Mode Toggle-->
-    <!-- The light/dark/auto switcher ships in adminlte.js as the ColorMode
-     module (since 4.1) — no page script needed. Only the no-flash snippet
-     in <head> stays inline, because it must run before first paint. -->
-    <!--end::Color Mode Toggle-->
 
     <!--end::Script-->
   </body>
   <!--end::Body-->
 </html>
+
+<!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+    <script src="../js/adminlte.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/carrito.js"></script>
+    <script src="../js/productos.js"></script>
+    <!--end::Required Plugin(AdminLTE)-->
