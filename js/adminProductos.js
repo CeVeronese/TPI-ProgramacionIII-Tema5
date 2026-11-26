@@ -18,6 +18,9 @@ async function cargarProductosAdmin() {
             const fila = document.createElement("tr");
 
             fila.innerHTML = `
+                <td>
+                    <input type="checkbox" class="seleccionar-producto" value="${producto.id}">
+                </td>
                 <td>${producto.id}</td>
                 <td>${producto.nombre}</td>
                 <td>${producto.categoria}</td>
@@ -31,7 +34,7 @@ async function cargarProductosAdmin() {
                         Eliminar
                     </button>
                 </td>
-            `;
+            `;  
 
             tabla.appendChild(fila);
         });
@@ -151,5 +154,45 @@ async function eliminarProducto(id) {
     } catch (error) {
         console.error("Error:", error);
         alert("No se pudo eliminar el producto");
+    }
+}
+
+document.getElementById("seleccionar-todos").addEventListener("change", function () {
+    const seleccionados = document.querySelectorAll(".seleccionar-producto");
+
+    seleccionados.forEach(checkbox => {
+        checkbox.checked = this.checked;
+    });
+});
+
+async function eliminarProductosSeleccionados() {
+    const seleccionados = document.querySelectorAll(".seleccionar-producto:checked");
+
+    if (seleccionados.length === 0) {
+        alert("Seleccioná al menos un producto");
+        return;
+    }
+
+    if (!confirm("¿Estás seguro de que querés eliminar los productos seleccionados?")) {
+        return;
+    }
+
+    try {
+        for (const checkbox of seleccionados) {
+            const respuesta = await fetch(`${API_USERS_PRODUCTS}/products/${checkbox.value}`, {
+                method: "DELETE"
+            });
+
+            if (!respuesta.ok) {
+                throw new Error("Error al eliminar un producto");
+            }
+        }
+
+        alert("Productos eliminados correctamente");
+        cargarProductosAdmin();
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("No se pudieron eliminar todos los productos");
     }
 }

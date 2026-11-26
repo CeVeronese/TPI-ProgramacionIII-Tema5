@@ -44,8 +44,10 @@
             </li>
           </ul>
           
+         <!-- Utilidades de la derecha (Pantalla completa, Modo oscuro/claro y Salir) -->
           <ul class="navbar-nav ms-auto">
-            <!-- Pantalla Completa -->
+
+            <!-- Botón de Pantalla Completa -->
             <li class="nav-item">
               <a class="nav-link" href="#" data-lte-toggle="fullscreen" aria-label="Pantalla completa">
                 <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
@@ -53,34 +55,70 @@
               </a>
             </li>
 
-            <!-- Selector de Tema -->
+          <!--begin::Cambiar el tema (#6010)-->
             <li class="nav-item dropdown">
-              <a class="nav-link" href="#" id="bd-theme" aria-label="Cambiar esquema de color" data-bs-toggle="dropdown" aria-expanded="false">
+              <a
+                class="nav-link"
+                href="#"
+                id="bd-theme"
+                aria-label="Toggle color scheme"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 <i class="bi bi-sun-fill" data-lte-theme-icon="light"></i>
                 <i class="bi bi-moon-fill d-none" data-lte-theme-icon="dark"></i>
                 <i class="bi bi-circle-half d-none" data-lte-theme-icon="auto"></i>
               </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme" style="--bs-dropdown-min-width: 8rem">
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="bd-theme"
+                style="--bs-dropdown-min-width: 8rem"
+              >
                 <li>
-                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
-                    <i class="bi bi-sun-fill me-2"></i> Claro
+                  <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center"
+                    data-bs-theme-value="light"
+                    aria-pressed="false"
+                  >
+                    <i class="bi bi-sun-fill me-2"></i>
+                    Claro
+                    <i class="bi bi-check-lg ms-auto d-none"></i>
                   </button>
                 </li>
                 <li>
-                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
-                    <i class="bi bi-moon-fill me-2"></i> Oscuro
+                  <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center"
+                    data-bs-theme-value="dark"
+                    aria-pressed="false"
+                  >
+                    <i class="bi bi-moon-fill me-2"></i>
+                    Oscuro
+                    <i class="bi bi-check-lg ms-auto d-none"></i>
                   </button>
                 </li>
                 <li>
-                  <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
-                    <i class="bi bi-circle-half me-2"></i> Automático
+                  <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center active"
+                    data-bs-theme-value="auto"
+                    aria-pressed="true"
+                  >
+                    <i class="bi bi-circle-half me-2"></i>
+                    Auto
+                    <i class="bi bi-check-lg ms-auto d-none"></i>
                   </button>
                 </li>
               </ul>
             </li>
+            <!--end::Cambiar el tema-->
 
+            <!-- Botón de Cerrar Sesión -->
             <li class="nav-item">
-              <a href="login.html" class="nav-link"><i class="bi bi-box-arrow-right"></i></a>
+              <a href="login.html" class="nav-link" aria-label="Salir">
+                <i class="bi bi-box-arrow-right"></i>
+              </a>
             </li>
           </ul>
         </div>
@@ -176,7 +214,7 @@
                   Confirmar compra
                 </button>
                 
-                <a href="catalogoNuevo.html" class="btn btn-secondary ms-2">Volver al catálogo</a>
+                <a href="catalogo.html" class="btn btn-secondary ms-2">Volver al catálogo</a>
 
               </div>
             </div>
@@ -191,15 +229,13 @@
 
     </div>
 
-    <!-- Scripts de la app -->
-    <script src="../js/adminlte.js"></script>
-    <script src="../js/config.js"></script>
-    <script src="../js/carrito.js"></script>
-    <script src="../js/pedidos.js"></script>
-    
-    <script>
-        // Ejecuta la función principal para pintar el carrito al cargar la página
-        mostrarCarrito();
-    </script>
+  <script src="../js/adminlte.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/carrito.js"></script>
+  <script src="../js/pedidos.js"></script>
+
+  <script>
+      mostrarCarrito();
+  </script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <!--begin::Head-->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -344,93 +344,99 @@
             <!--begin::Row-->
             <div class="row">
               <div class="col-12">
-                <!--centro del panel CELESTE-->
+              <!--centro del panel CELESTE-->
                 <!-- Gestión de productos -->
-                <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Listado de productos</h3>
-                    <button class="btn btn-primary float-end" onclick="mostrarFormulario()">
-                    <i class="bi bi-plus-circle me-1"></i>
-                    Agregar producto
-                    </button>
-                </div>
-
-                <div class="card-body">
-                    <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Categoría</th>
-                            <th>Precio</th>
-                            <th>Disponibilidad</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tabla-productos">
-                        <tr>
-                            <td colspan="6" class="text-center">
-                            Cargando productos...
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    </div>
-                </div>
-                </div>
-                <!-- Formulario para agregar productos CELESTE-->
-                <div class="card mt-3" id="formulario-producto" style="display: none;">
+                  <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Nuevo producto</h3>
-                    </div>
+                      <h3 class="card-title">Listado de productos</h3>
+                      <button class="btn btn-danger float-end ms-2" onclick="eliminarProductosSeleccionados()">
+                          <i class="bi bi-trash me-1"></i>
+                          Eliminar seleccionados
+                      </button>
 
+                      <button class="btn btn-primary float-end" onclick="mostrarFormulario()">
+                          <i class="bi bi-plus-circle me-1"></i>
+                          Agregar producto
+                      </button>
+                    </div>
                     <div class="card-body">
-                        <form id="form-producto">
-                            <div class="mb-3">
-                                <label class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Categoría</label>
-                                <input type="text" class="form-control" id="categoria" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Precio</label>
-                                <input type="number" class="form-control" id="precio" min="0" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Imagen (URL)</label>
-                                <input type="text" class="form-control" id="imagen">
-                            </div>
-
-                            <div class="form-check mb-3">
-                                <input type="checkbox" class="form-check-input" id="disponible" checked>
-                                <label class="form-check-label">Producto disponible</label>
-                            </div>
-
-                            <button type="submit" class="btn btn-success">Guardar producto</button>
-                            <button type="button" class="btn btn-secondary" onclick="ocultarFormulario()">Cancelar</button>
-                        </form>
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>
+                                <input type="checkbox" id="seleccionar-todos">
+                              </th>
+                              <th>ID</th>
+                              <th>Nombre</th>
+                              <th>Categoría</th>
+                              <th>Precio</th>
+                              <th>Disponibilidad</th>
+                              <th>Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody id="tabla-productos">
+                            <tr>
+                              <td colspan="7" class="text-center">
+                                Cargando productos...
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
-                </div>
-                <!-- Fin formulario CELESTE-->
+                  </div>
+                  <!-- Formulario para agregar productos CELESTE-->
+                  <div class="card mt-3" id="formulario-producto" style="display: none;">
+                    <div class="card-header">
+                      <h3 class="card-title">Nuevo producto</h3>
+                    </div>
+                    <div class="card-body">
+                      <form id="form-producto">
+                        <div class="mb-3">
+                          <label class="form-label">Nombre</label>
+                          <input type="text" class="form-control" id="nombre" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Categoría</label>
+                          <input type="text" class="form-control" id="categoria" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Precio</label>
+                          <input type="number" class="form-control" id="precio" min="0" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Imagen (URL)</label>
+                          <input type="text" class="form-control" id="imagen">
+                        </div>
+
+                        <div class="form-check mb-3">
+                          <input type="checkbox" class="form-check-input" id="disponible" checked>
+                          <label class="form-check-label">Producto disponible</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Guardar producto</button>
+                        <button type="button" class="btn btn-secondary" onclick="ocultarFormulario()">Cancelar</button>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- Fin formulario CELESTE-->
                 <!-- Fin gestión de productos-->
-                <!--centro del panel CELESTE-->
-              </div>
-              <!-- /.col -->
+              <!--centro del panel CELESTE-->
             </div>
-            <!--end::Row-->
+            <!-- /.col -->
+          </div>
+          <!--end::Row-->
           </div>
           <!--end::Container-->
         </div>
         <!--end::App Content-->
       </main>
-      <!--end::App Main-->
-      <!--begin::Footer-->
+    <!--end::App Main-->
+    <!--begin::Footer-->
       <footer class="app-footer">
         <!--begin::To the end-->
         <div class="float-end d-none d-sm-inline">Anything you want</div>
@@ -509,12 +515,12 @@
             window.location.href = "login.html";
         }
     </script>
+    
+    <!--cargar archivos externos CELESTE-->
+    <script src="../js/adminlte.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/adminProductos.js"></script>
+    <!--cargar archivos externos CELESTE-->
   </body>
   <!--end::Body-->
 </html>
-
-<!--cargar archivos externos CELESTE-->
-<script src="../js/adminlte.js"></script>
-<script src="../js/config.js"></script>
-<script src="../js/adminProductos.js"></script>
-<!--cargar archivos externos CELESTE-->
