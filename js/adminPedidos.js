@@ -54,7 +54,7 @@ async function cargarPedidosAdmin() {
                         <option value="Entregado" ${pedido.estado === "Entregado" ? "selected" : ""}>Entregado</option>
                     </select>
                 </td>
-                <td>${pedido.fecha}</td>
+                <td>${pedido.fecha ? pedido.fecha.split("T")[0].split("-").reverse().join("/") : "Sin fecha"}</td>
                 <td>
                     <button class="btn btn-primary btn-sm"
                         onclick="verDetallesPedido('${pedido.id}')">
@@ -101,7 +101,7 @@ function verDetallesPedido(id) {
 
             let html = `
                 <p><strong>Pedido:</strong> ${pedido.id}</p>
-                <p><strong>Fecha:</strong> ${pedido.fecha}</p>
+                <p><strong>Fecha:</strong> ${pedido.fecha ? pedido.fecha.split("-").reverse().join("/") : "Sin fecha"}</p>
                 <p><strong>Estado:</strong> ${pedido.estado}</p>
                 <hr>
                 <h6>Productos:</h6>
@@ -118,6 +118,10 @@ function verDetallesPedido(id) {
 
             html += `
                 <hr>
+                <p><strong>Subtotal:</strong> $${pedido.subtotal ?? pedido.total}</p>
+                <p><strong>Descuento:</strong> $${pedido.descuento ?? 0}</p>
+                <p><strong>Cupon utilizado:</strong> ${pedido.cupon || "Ninguno"}</p>
+                <p><strong>Envío gratis:</strong> ${pedido.envioGratis ? "Sí" : "No"}</p>
                 <h5 class="text-end">Total: $${pedido.total}</h5>
             `;
 
@@ -244,5 +248,44 @@ async function eliminarPedidosSeleccionados() {
     } catch (error) {
         console.error("Error:", error);
         alert("No se pudieron eliminar todos los pedidos");
+    }
+}
+
+async function cambiarEstadoSeleccionados() {
+    const seleccionados = document.querySelectorAll(".seleccionar-pedido:checked");
+    const nuevoEstado = document.getElementById("nuevoEstado").value;
+
+    if (seleccionados.length === 0) {
+        alert("Seleccioná al menos un pedido");
+        return;
+    }
+
+    if (!confirm("¿Querés cambiar el estado de los pedidos seleccionados?")) {
+        return;
+    }
+
+    try {
+        for (const checkbox of seleccionados) {
+            const respuesta = await fetch(`${API_ORDERS}/orders/${checkbox.value}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    estado: nuevoEstado
+                })
+            });
+
+            if (!respuesta.ok) {
+                throw new Error("Error al actualizar un pedido");
+            }
+        }
+
+        alert("Estados actualizados correctamente");
+        cargarPedidosAdmin();
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("No se pudieron actualizar todos los pedidos");
     }
 }

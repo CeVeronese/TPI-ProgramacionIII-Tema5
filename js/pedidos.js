@@ -1,4 +1,3 @@
-
 async function confirmarPedido() {
     if (carrito.length === 0) {
         alert("El carrito está vacío");

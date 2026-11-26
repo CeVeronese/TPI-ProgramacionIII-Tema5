@@ -347,10 +347,15 @@
               <div class="col-12">
                 <!--centro del panel CELESTE-->
                 <!-- Gestión de pedidos -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Listado de pedidos</h3>
-                    </div>
+                <div class="card-header">
+                    <h3 class="card-title">Listado de pedidos</h3>
+
+                    <button class="btn btn-danger float-end"
+                        onclick="eliminarPedidosSeleccionados()">
+                        <i class="bi bi-trash me-1"></i>
+                        Eliminar seleccionados
+                    </button>
+                </div>
 
                     <div class="card-body">
 
@@ -367,6 +372,24 @@
                             <option value="Entregado">Entregados</option>
                         </select>
                     </div>
+                    <div class="mb-3">
+                      <label for="nuevoEstado" class="form-label">
+                          Cambiar estado de pedidos seleccionados:
+                      </label>
+
+                      <div class="d-flex gap-2">
+                          <select id="nuevoEstado" class="form-select">
+                              <option value="Pendiente">Pendiente</option>
+                              <option value="En preparación">En preparación</option>
+                              <option value="Enviado">Enviado</option>
+                              <option value="Entregado">Entregado</option>
+                          </select>
+
+                          <button class="btn btn-primary" onclick="cambiarEstadoSeleccionados()">
+                              Aplicar
+                          </button>
+                      </div>
+                  </div>
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
