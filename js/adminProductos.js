@@ -11,6 +11,14 @@ async function cargarProductosAdmin() {
         }
 
         const productos = await respuesta.json();
+        const filtro = document.getElementById("filtro-categoria");
+        const categorias = [...new Set(productos.map(producto => producto.categoria))];
+
+        filtro.innerHTML = '<option value="Todas">Todas las categorías</option>';
+
+        categorias.forEach(categoria => {
+            filtro.innerHTML += `<option value="${categoria}">${categoria}</option>`;
+        });
 
         tabla.innerHTML = "";
 
@@ -52,6 +60,21 @@ async function cargarProductosAdmin() {
 }
 
 cargarProductosAdmin();
+
+document.getElementById("filtro-categoria").addEventListener("change", function () {
+    const categoriaSeleccionada = this.value;
+    const filas = document.querySelectorAll("#tabla-productos tr");
+
+    filas.forEach(fila => {
+        const categoria = fila.children[3].textContent;
+
+        if (categoriaSeleccionada === "Todas" || categoria === categoriaSeleccionada) {
+            fila.style.display = "";
+        } else {
+            fila.style.display = "none";
+        }
+    });
+});
 
 function mostrarFormulario() {
     document.getElementById("formulario-producto").style.display = "block";
@@ -196,3 +219,4 @@ async function eliminarProductosSeleccionados() {
         alert("No se pudieron eliminar todos los productos");
     }
 }
+

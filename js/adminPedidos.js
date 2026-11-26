@@ -39,6 +39,9 @@ async function cargarPedidosAdmin() {
             const fila = document.createElement("tr");
 
             fila.innerHTML = `
+                <td>
+                    <input type="checkbox" class="seleccionar-pedido" value="${pedido.id}">
+                </td>
                 <td>${pedido.id}</td>
                 <td>${nombreUsuario}</td>
                 <td>$${pedido.total}</td>
@@ -63,7 +66,6 @@ async function cargarPedidosAdmin() {
                         <i class="bi bi-trash"></i> Eliminar
                     </button>
                 </td>
-
             `;
 
             tabla.appendChild(fila);
@@ -203,4 +205,44 @@ function filtrarPedidos() {
             fila.style.display = "none";
         }
     });
+}
+
+document.getElementById("seleccionar-todos-pedidos").addEventListener("change", function () {
+    const seleccionados = document.querySelectorAll(".seleccionar-pedido");
+
+    seleccionados.forEach(checkbox => {
+        checkbox.checked = this.checked;
+    });
+});
+
+async function eliminarPedidosSeleccionados() {
+    const seleccionados = document.querySelectorAll(".seleccionar-pedido:checked");
+
+    if (seleccionados.length === 0) {
+        alert("Seleccioná al menos un pedido");
+        return;
+    }
+
+    if (!confirm("¿Estás seguro de que querés eliminar los pedidos seleccionados?")) {
+        return;
+    }
+
+    try {
+        for (const checkbox of seleccionados) {
+            const respuesta = await fetch(`${API_ORDERS}/orders/${checkbox.value}`, {
+                method: "DELETE"
+            });
+
+            if (!respuesta.ok) {
+                throw new Error("Error al eliminar un pedido");
+            }
+        }
+
+        alert("Pedidos eliminados correctamente");
+        cargarPedidosAdmin();
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("No se pudieron eliminar todos los pedidos");
+    }
 }

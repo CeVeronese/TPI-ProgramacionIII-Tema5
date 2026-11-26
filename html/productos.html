@@ -348,7 +348,13 @@
                 <!-- Gestión de productos -->
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Listado de productos</h3>
+                      <div class="d-flex align-items-center gap-3 flex-wrap">
+                          <h3 class="card-title mb-0">Listado de productos</h3>
+
+                          <select id="filtro-categoria" class="form-select" style="width: 220px;">
+                              <option value="Todas">Todas las categorías</option>
+                          </select>
+                      </div>
                       <button class="btn btn-danger float-end ms-2" onclick="eliminarProductosSeleccionados()">
                           <i class="bi bi-trash me-1"></i>
                           Eliminar seleccionados
