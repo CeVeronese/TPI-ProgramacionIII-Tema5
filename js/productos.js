@@ -38,6 +38,8 @@ function mostrarProductos(productos) {
 
         boton.addEventListener("click", () => {
             agregarAlCarrito(producto);
+
+            alert("¡Producto agregado correctamente al carrito!");
         });
 
         tarjeta.appendChild(boton);
