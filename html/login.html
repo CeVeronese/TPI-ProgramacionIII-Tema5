@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styleLogin.css">
 </head>
 <body>
 
     <main>
         <h1>Iniciar sesión</h1>
+
+        <!-- Mensaje de error dinámico (lo usa auth.js si las credenciales fallan) -->
+        <p id="mensaje-error" style="color: red;"></p>
 
         <form id="form-login">
             <label for="email">Correo electrónico:</label>
@@ -20,6 +23,10 @@
 
             <button type="submit">Ingresar</button>
         </form>
+
+        <p style="margin-top: 15px;">
+            ¿No tenés cuenta? <a href="registro.html">Registrate acá</a>
+        </p>
     </main>
 
     <script src="../js/config.js"></script>

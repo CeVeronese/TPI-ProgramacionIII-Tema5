@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+  <!-- Cabecera de la página -->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TPI Programación III | Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Inicialización del tema para evitar parpadeos y sincronizar -->
+    <script>
+      (() => {
+        'use strict';
+        const raiz = document.documentElement;
+        const CLAVE_ALMACENAMIENTO = 'lte-theme';
+        let almacenado = null;
+        try {
+          almacenado = localStorage.getItem(CLAVE_ALMACENAMIENTO);
+        } catch {}
+        const resuelto = (almacenado === 'dark' || almacenado === 'light') ? almacenado : 
+                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        raiz.setAttribute('data-bs-theme', resuelto);
+      })();
+    </script>
+
+    <!-- Plugin Requerido: AdminLTE -->
+    <link rel="stylesheet" href="../css/adminlte.css" />
+    
+    <!-- Iconos de Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <!-- Cuerpo de la página -->
+  <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <!-- Contenedor principal de la aplicación -->
+    <div class="app-wrapper">
+      
+      <!-- Barra de navegación superior -->
+      <nav class="app-header navbar navbar-expand bg-body">
+        <div class="container-fluid">
+          <!-- Botón de menú y enlace de inicio -->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button" aria-label="Alternar barra lateral">
+                <i class="bi bi-list"></i>
+              </a>
+            </li>
+            <li class="nav-item d-none d-md-block">
+              <a href="./inicioCliente.html" class="nav-link">Inicio</a>
+            </li>
+          </ul>
+
+          <!-- Utilidades de la derecha (Pantalla completa, Modo oscuro/claro y Salir) -->
+          <ul class="navbar-nav ms-auto">
+            
+            <!-- Botón de Pantalla Completa -->
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-lte-toggle="fullscreen" aria-label="Pantalla completa">
+                <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
+                <i data-lte-icon="minimize" class="bi bi-fullscreen-exit d-none"></i>
+              </a>
+            </li>
+
+            <!-- Selector de Modo de Color -->
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="#" id="bd-theme" aria-label="Cambiar esquema de color" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-sun-fill" data-lte-theme-icon="light"></i>
+                <i class="bi bi-moon-fill d-none" data-lte-theme-icon="dark"></i>
+                <i class="bi bi-circle-half d-none" data-lte-theme-icon="auto"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme" style="--bs-dropdown-min-width: 8rem">
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+                    <i class="bi bi-sun-fill me-2"></i> Claro
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+                    <i class="bi bi-moon-fill me-2"></i> Oscuro
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
+                    <i class="bi bi-circle-half me-2"></i> Automático
+                  </button>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Botón de Cerrar Sesión -->
+            <li class="nav-item">
+              <a href="./login.html" class="nav-link" aria-label="Salir">
+                <i class="bi bi-box-arrow-right"></i>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Menú lateral (Sidebar) -->
+      <aside class="app-sidebar bg-body-secondary shadow">
+        <!-- Marca de la barra lateral -->
+        <div class="sidebar-brand">
+          <a href="./inicioCliente.html" class="brand-link">
+            <span class="brand-text fw-bold">TPI Programación III</span>
+          </a>
+        </div>
+
+        <!-- Contenedor de enlaces del menú -->
+        <div class="sidebar-wrapper">
+          <nav class="mt-2">
+            <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu">
+              
+              <!-- Inicio -->
+              <li class="nav-item">
+                <a href="./inicioCliente.html" class="nav-link active">
+                  <i class="nav-icon bi bi-house-door"></i>
+                  <p>Inicio</p>
+                </a>
+              </li>
+
+              <!-- Catálogo -->
+              <li class="nav-item">
+                <a href="./catalogo.html" class="nav-link">
+                  <i class="nav-icon bi bi-grid"></i>
+                  <p>Catálogo</p>
+                </a>
+              </li>
+
+              <!-- Carrito -->
+              <li class="nav-item">
+                <a href="./carrito.html" class="nav-link">
+                  <i class="nav-icon bi bi-cart"></i>
+                  <p>Carrito</p>
+                </a>
+              </li>
+
+              <!-- Pedidos -->
+              <li class="nav-item">
+                <a href="./pedidos.html" class="nav-link">
+                  <i class="nav-icon bi bi-box-seam"></i>
+                  <p>Pedidos</p>
+                </a>
+              </li>
+
+              <!-- Cupones -->
+              <li class="nav-item">
+                <a href="./cupones.html" class="nav-link">
+                  <i class="nav-icon bi bi-tag"></i>
+                  <p>Cupones</p>
+                </a>
+              </li>
+
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Contenido Principal -->
+      <main class="app-main">
+        <!-- Encabezado de contenido -->
+        <div class="app-content-header">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6">
+                <h3 class="mb-0">Sección Principal</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cuerpo del contenido -->
+        <div class="app-content">
+          <div class="container-fluid">
+            <div class="card">
+              <div class="card-body">
+                <p>Contenido principal de la página...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Pie de página -->
+      <footer class="app-footer">
+        <div class="float-end d-none d-sm-inline">UTN FRVM</div>
+        <strong>Copyright &copy; 2026 </strong> Todos los derechos reservados.
+      </footer>
+
+    </div>
+
+    <!-- Scripts de AdminLTE -->
+    <script src="../js/adminlte.js"></script>
+  </body>
+</html>
