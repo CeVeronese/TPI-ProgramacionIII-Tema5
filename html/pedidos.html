@@ -214,17 +214,23 @@
             <!--begin::User Menu Dropdown CELESTE-->
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <i class="bi bi-person-circle me-1"></i>
-                <span class="d-none d-md-inline">Administrador</span>
+                <img src="assets/img/foto-perfil.jpeg"
+                  class="rounded-circle"
+                  alt="Foto de perfil"
+                  style="width: 30px; height: 30px; object-fit: cover;">
+                <span class="d-none d-md-inline" id="nombre-admin">Administrador</span>
               </a>
 
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <li class="user-header text-bg-primary">
-                  <i class="bi bi-person-circle fs-1"></i>
+                  <img src="assets/img/foto-perfil.jpeg"
+                    class="rounded-circle"
+                    alt="Foto de perfil"
+                    style="width: 90px; height: 90px; object-fit: cover;">
                   <p>
-                    Administrador
-                    <small>Gestión de pedidos</small>
-                  </p>
+                    <span id="nombre-admin-menu">Administrador</span>
+                    <small>Panel de administración</small>
+                </p>
                 </li>
 
                 <li class="user-footer">
@@ -236,7 +242,6 @@
               </ul>
             </li>
             <!--end::User Menu Dropdown CELESTE-->
-
           </ul>
           <!--end::End Navbar Links-->
         </div>
