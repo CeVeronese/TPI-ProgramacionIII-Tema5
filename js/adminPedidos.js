@@ -251,8 +251,6 @@ async function eliminarPedidosSeleccionados() {
     }
 }
 
-<<<<<<< HEAD
-=======
 async function cambiarEstadoSeleccionados() {
     const seleccionados = document.querySelectorAll(".seleccionar-pedido:checked");
     const nuevoEstado = document.getElementById("nuevoEstado").value;
@@ -291,4 +289,3 @@ async function cambiarEstadoSeleccionados() {
         alert("No se pudieron actualizar todos los pedidos");
     }
 }
->>>>>>> 284796155541f25a9385186f38ddc61a77ae17db

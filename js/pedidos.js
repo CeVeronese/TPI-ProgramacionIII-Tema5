@@ -13,9 +13,10 @@ async function confirmarPedido() {
     const descuentoTotal = calcularDescuento(subtotal);
     const totalFinal = subtotal - descuentoTotal;
 
+    const usuarioActual = JSON.parse(localStorage.getItem("usuarioActual"));
     const pedido = {
         id: "PED-" + Math.floor(100000 + Math.random() * 900000),
-        userId: "1",
+        userId: String(usuarioActual.id),
         items: carrito.map(producto => ({
             ...producto,
             precioOriginal: Number(producto.precio),

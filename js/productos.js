@@ -41,6 +41,7 @@ function actualizarFiltroCategorias() {
 
 function mostrarProductos(productos) {
     const contenedor = document.getElementById("lista-productos");
+    if (!contenedor) return;
 
     contenedor.innerHTML = "";
 

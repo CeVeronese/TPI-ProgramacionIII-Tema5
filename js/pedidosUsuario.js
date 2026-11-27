@@ -6,25 +6,29 @@ async function mostrarPedidosCliente() {
     const contenedorTabla = document.getElementById("lista-pedidos");
     if (!contenedorTabla) return;
 
+    // Obtenemos el ID o email del usuario actual logueado (ajustá la clave según tu sistema de login, ej: "usuario" o "userId")
+    const usuarioActual = JSON.parse(localStorage.getItem("usuarioActual"));
+    const idUsuario = usuarioActual.id;
+    console.log("ID DEL USUARIO:", idUsuario);
+
     let pedidos = [];
 
     try {
-        // 1. Intentamos traer los pedidos actualizados desde el servidor (donde impactan los cambios del admin)
         const respuesta = await fetch(`${API_ORDERS}/orders`);
         if (respuesta.ok) {
             const datosServidor = await respuesta.json();
-            // Filtramos los pedidos del usuario actual (userId "1") o mostramos todos si no hay filtro
-            pedidos = datosServidor.filter(p => !p.userId || String(p.userId) === "1");
-            
-            // Actualizamos la copia local para mantenerla sincronizada
-            localStorage.setItem("pedidos", JSON.stringify(pedidos));
+            // FILTRADO CLAVE: Solo traemos los pedidos cuyo userId o usuario coincida con el actual
+            pedidos = datosServidor.filter(p => String(p.userId) === String(idUsuario));
+            console.log("ID DEL USUARIO:", idUsuario);
+            console.log("PEDIDOS ENCONTRADOS:", pedidos);
         } else {
-            throw new Error("Respuesta no válida del servidor");
+            throw new Error("Error en servidor");
         }
     } catch (error) {
-        console.warn("No se pudo conectar con la API, leyendo desde localStorage:", error);
-        // 2. Respaldo: Si no hay conexión con el backend, leemos lo que haya en localStorage
-        pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+        console.warn("Leyendo desde localStorage con filtro de usuario:", error);
+        // Si usamos localStorage, filtramos los pedidos guardados que correspondan a este usuario
+        const todosLosPedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+        pedidos = todosLosPedidos.filter(p => String(p.userId) === String(idUsuario));
     }
 
     if (pedidos.length === 0) {
@@ -46,13 +50,12 @@ async function mostrarPedidosCliente() {
             listaProductos = listaItems.map(p => `${p.nombre || 'Producto'} (x${p.cantidad || 1})`).join(", ");
         }
 
-        // Mapeo dinámico de colores según el estado que haya puesto el admin
         let claseBadge = "bg-warning text-dark";
         let estadoStr = pedido.estado ? pedido.estado.toLowerCase() : "pendiente";
 
-        if (estadoStr.includes("aprobado") || estadoStr.includes("entregado") || estadoStr.includes("completado") || estadoStr.includes("confirmado")) {
+        if (estadoStr.includes("aprobado") || estadoStr.includes("entregado") || estadoStr.includes("completado")) {
             claseBadge = "bg-success";
-        } else if (estadoStr.includes("en camino") || estadoStr.includes("enviado") || estadoStr.includes("proceso")) {
+        } else if (estadoStr.includes("en camino") || estadoStr.includes("enviado")) {
             claseBadge = "bg-info text-dark";
         } else if (estadoStr.includes("cancelado") || estadoStr.includes("rechazado")) {
             claseBadge = "bg-danger";
@@ -81,8 +84,10 @@ async function mostrarPedidosCliente() {
 }
 
 function verDetallePedido(id) {
-    const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-    const pedido = pedidos.find(p => String(p.id) === String(id));
+    const usuarioActual = JSON.parse(localStorage.getItem("usuarioActual"));
+    const idUsuario = usuarioActual.id;
+    const todosLosPedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+    const pedido = todosLosPedidos.find(p => String(p.id) === String(id) && String(p.userId) === String(idUsuario));
     
     if (pedido) {
         alert(`Detalle del pedido: ${pedido.id}\nFecha: ${pedido.fecha}\nEstado actual: ${pedido.estado}\nTotal: $${pedido.total}`);
