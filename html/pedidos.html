@@ -214,17 +214,23 @@
             <!--begin::User Menu Dropdown CELESTE-->
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <i class="bi bi-person-circle me-1"></i>
-                <span class="d-none d-md-inline">Administrador</span>
+                <img src="assets/img/foto-perfil.jpeg"
+                  class="rounded-circle"
+                  alt="Foto de perfil"
+                  style="width: 30px; height: 30px; object-fit: cover;">
+                <span class="d-none d-md-inline" id="nombre-admin">Administrador</span>
               </a>
 
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <li class="user-header text-bg-primary">
-                  <i class="bi bi-person-circle fs-1"></i>
+                  <img src="assets/img/foto-perfil.jpeg"
+                    class="rounded-circle"
+                    alt="Foto de perfil"
+                    style="width: 90px; height: 90px; object-fit: cover;">
                   <p>
-                    Administrador
-                    <small>Gestión de pedidos</small>
-                  </p>
+                    <span id="nombre-admin-menu">Administrador</span>
+                    <small>Panel de administración</small>
+                </p>
                 </li>
 
                 <li class="user-footer">
@@ -236,7 +242,6 @@
               </ul>
             </li>
             <!--end::User Menu Dropdown CELESTE-->
-
           </ul>
           <!--end::End Navbar Links-->
         </div>
@@ -347,10 +352,15 @@
               <div class="col-12">
                 <!--centro del panel CELESTE-->
                 <!-- Gestión de pedidos -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Listado de pedidos</h3>
-                    </div>
+                <div class="card-header">
+                    <h3 class="card-title">Listado de pedidos</h3>
+
+                    <button class="btn btn-danger float-end"
+                        onclick="eliminarPedidosSeleccionados()">
+                        <i class="bi bi-trash me-1"></i>
+                        Eliminar seleccionados
+                    </button>
+                </div>
 
                     <div class="card-body">
 
@@ -367,11 +377,32 @@
                             <option value="Entregado">Entregados</option>
                         </select>
                     </div>
+                    <div class="mb-3">
+                      <label for="nuevoEstado" class="form-label">
+                          Cambiar estado de pedidos seleccionados:
+                      </label>
+
+                      <div class="d-flex gap-2">
+                          <select id="nuevoEstado" class="form-select">
+                              <option value="Pendiente">Pendiente</option>
+                              <option value="En preparación">En preparación</option>
+                              <option value="Enviado">Enviado</option>
+                              <option value="Entregado">Entregado</option>
+                          </select>
+
+                          <button class="btn btn-primary" onclick="cambiarEstadoSeleccionados()">
+                              Aplicar
+                          </button>
+                      </div>
+                  </div>
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th>
+                                            <input type="checkbox" id="seleccionar-todos-pedidos">
+                                        </th>
                                         <th>ID</th>
                                         <th>Usuario</th>
                                         <th>Total</th>
@@ -383,7 +414,7 @@
 
                                 <tbody id="tabla-pedidos">
                                     <tr>
-                                        <td colspan="6" class="text-center">
+                                        <td colspan="7" class="text-center">
                                             Cargando pedidos...
                                         </td>
                                     </tr>
@@ -433,20 +464,6 @@
         <!--end::App Content-->
       </main>
       <!--end::App Main-->
-      <!--begin::Footer-->
-      <footer class="app-footer">
-        <!--begin::To the end-->
-        <div class="float-end d-none d-sm-inline">Anything you want</div>
-        <!--end::To the end-->
-        <!--begin::Copyright-->
-        <strong>
-          Copyright &copy; 2014-2026&nbsp;
-          <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
-        </strong>
-        All rights reserved.
-        <!--end::Copyright-->
-      </footer>
-      <!--end::Footer-->
     </div>
     <!--end::App Wrapper-->
     <!--begin::Script-->

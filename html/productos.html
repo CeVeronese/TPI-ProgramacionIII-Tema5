@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <!--begin::Head-->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -109,9 +109,10 @@
     <!--begin::App Wrapper-->
     <div class="app-wrapper">
       <!--begin::Header-->
-      <nav class="app-header navbar navbar-expand bg-body">
+      <nav class="app-header navbar navbar-expand bg-body fixed-top">
         <!--begin::Container-->
         <div class="container-fluid">
+
           <!--begin::Start Navbar Links-->
           <ul class="navbar-nav">
             <li class="nav-item">
@@ -214,17 +215,23 @@
             <!--begin::User Menu Dropdown CELESTE-->
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <i class="bi bi-person-circle me-1"></i>
-                <span class="d-none d-md-inline">Administrador</span>
+                <img src="assets/img/foto-perfil.jpeg"
+                  class="rounded-circle"
+                  alt="Foto de perfil"
+                  style="width: 30px; height: 30px; object-fit: cover;">
+                <span class="d-none d-md-inline" id="nombre-admin">Administrador</span>
               </a>
 
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <li class="user-header text-bg-primary">
-                  <i class="bi bi-person-circle fs-1"></i>
+                  <img src="assets/img/foto-perfil.jpeg"
+                    class="rounded-circle"
+                    alt="Foto de perfil"
+                    style="width: 90px; height: 90px; object-fit: cover;">
                   <p>
-                    Administrador
-                    <small>Gestión de productos</small>
-                  </p>
+                    <span id="nombre-admin-menu">Administrador</span>
+                    <small>Panel de administración</small>
+                </p>
                 </li>
 
                 <li class="user-footer">
@@ -344,106 +351,104 @@
             <!--begin::Row-->
             <div class="row">
               <div class="col-12">
-                <!--centro del panel CELESTE-->
+              <!--centro del panel CELESTE-->
                 <!-- Gestión de productos -->
-                <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Listado de productos</h3>
-                    <button class="btn btn-primary float-end" onclick="mostrarFormulario()">
-                    <i class="bi bi-plus-circle me-1"></i>
-                    Agregar producto
-                    </button>
-                </div>
-
-                <div class="card-body">
-                    <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Categoría</th>
-                            <th>Precio</th>
-                            <th>Disponibilidad</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tabla-productos">
-                        <tr>
-                            <td colspan="6" class="text-center">
-                            Cargando productos...
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    </div>
-                </div>
-                </div>
-                <!-- Formulario para agregar productos CELESTE-->
-                <div class="card mt-3" id="formulario-producto" style="display: none;">
+                  <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Nuevo producto</h3>
-                    </div>
+                      <div class="d-flex align-items-center gap-3 flex-wrap">
+                          <h3 class="card-title mb-0">Listado de productos</h3>
 
+                          <select id="filtro-categoria" class="form-select" style="width: 220px;">
+                              <option value="Todas">Todas las categorías</option>
+                          </select>
+                      </div>
+                      <button class="btn btn-danger float-end ms-2" onclick="eliminarProductosSeleccionados()">
+                          <i class="bi bi-trash me-1"></i>
+                          Eliminar seleccionados
+                      </button>
+
+                      <button class="btn btn-primary float-end" onclick="mostrarFormulario()">
+                          <i class="bi bi-plus-circle me-1"></i>
+                          Agregar producto
+                      </button>
+                    </div>
                     <div class="card-body">
-                        <form id="form-producto">
-                            <div class="mb-3">
-                                <label class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Categoría</label>
-                                <input type="text" class="form-control" id="categoria" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Precio</label>
-                                <input type="number" class="form-control" id="precio" min="0" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Imagen (URL)</label>
-                                <input type="text" class="form-control" id="imagen">
-                            </div>
-
-                            <div class="form-check mb-3">
-                                <input type="checkbox" class="form-check-input" id="disponible" checked>
-                                <label class="form-check-label">Producto disponible</label>
-                            </div>
-
-                            <button type="submit" class="btn btn-success">Guardar producto</button>
-                            <button type="button" class="btn btn-secondary" onclick="ocultarFormulario()">Cancelar</button>
-                        </form>
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>
+                                <input type="checkbox" id="seleccionar-todos">
+                              </th>
+                              <th>ID</th>
+                              <th>Nombre</th>
+                              <th>Categoría</th>
+                              <th>Precio</th>
+                              <th>Disponibilidad</th>
+                              <th>Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody id="tabla-productos">
+                            <tr>
+                              <td colspan="7" class="text-center">
+                                Cargando productos...
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
-                </div>
-                <!-- Fin formulario CELESTE-->
+                  </div>
+                  <!-- Formulario para agregar productos CELESTE-->
+                  <div class="card mt-3" id="formulario-producto" style="display: none;">
+                    <div class="card-header">
+                      <h3 class="card-title">Nuevo producto</h3>
+                    </div>
+                    <div class="card-body">
+                      <form id="form-producto">
+                        <div class="mb-3">
+                          <label class="form-label">Nombre</label>
+                          <input type="text" class="form-control" id="nombre" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Categoría</label>
+                          <input type="text" class="form-control" id="categoria" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Precio</label>
+                          <input type="number" class="form-control" id="precio" min="0" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Imagen (URL)</label>
+                          <input type="text" class="form-control" id="imagen">
+                        </div>
+
+                        <div class="form-check mb-3">
+                          <input type="checkbox" class="form-check-input" id="disponible" checked>
+                          <label class="form-check-label">Producto disponible</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Guardar producto</button>
+                        <button type="button" class="btn btn-secondary" onclick="ocultarFormulario()">Cancelar</button>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- Fin formulario CELESTE-->
                 <!-- Fin gestión de productos-->
-                <!--centro del panel CELESTE-->
-              </div>
-              <!-- /.col -->
+              <!--centro del panel CELESTE-->
             </div>
-            <!--end::Row-->
+            <!-- /.col -->
+          </div>
+          <!--end::Row-->
           </div>
           <!--end::Container-->
         </div>
         <!--end::App Content-->
       </main>
-      <!--end::App Main-->
-      <!--begin::Footer-->
-      <footer class="app-footer">
-        <!--begin::To the end-->
-        <div class="float-end d-none d-sm-inline">Anything you want</div>
-        <!--end::To the end-->
-        <!--begin::Copyright-->
-        <strong>
-          Copyright &copy; 2014-2026&nbsp;
-          <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
-        </strong>
-        All rights reserved.
-        <!--end::Copyright-->
-      </footer>
-      <!--end::Footer-->
+    <!--end::App Main-->
     </div>
     <!--end::App Wrapper-->
     <!--begin::Script-->
@@ -509,12 +514,12 @@
             window.location.href = "login.html";
         }
     </script>
+    
+    <!--cargar archivos externos CELESTE-->
+    <script src="../js/adminlte.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/adminProductos.js"></script>
+    <!--cargar archivos externos CELESTE-->
   </body>
   <!--end::Body-->
 </html>
-
-<!--cargar archivos externos CELESTE-->
-<script src="../js/adminlte.js"></script>
-<script src="../js/config.js"></script>
-<script src="../js/adminProductos.js"></script>
-<!--cargar archivos externos CELESTE-->

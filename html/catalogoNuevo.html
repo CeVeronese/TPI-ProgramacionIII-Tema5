@@ -69,7 +69,7 @@
     <!--begin::Accessibility Features-->
     <!-- Skip links will be dynamically added by accessibility.js -->
     <meta name="supported-color-schemes" content="light dark" />
-    <link rel="preload" href="./css/adminlte.css" as="style" />
+    <link rel="preload" href="../css/adminlte.css" as="style" />
     <!--end::Accessibility Features-->
 
     <!--begin::Fonts-->
@@ -100,8 +100,8 @@
     <!--end::Third Party Plugin(Bootstrap Icons)-->
 
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="../css/adminlte.css" />
-    <link rel="stylesheet" href="../css/catalogo.css" />
+    <link rel="stylesheet" href="../css/adminlte.css">
+    <link rel="stylesheet" href="../css/catalogo.css">
     <!--end::Required Plugin(AdminLTE)-->
   </head>
   <!--end::Head-->
@@ -257,7 +257,6 @@
                   <p>Cupones</p>
                 </a>
               </li>
-
             </ul>
           </nav>
         </div>
@@ -265,22 +264,43 @@
       <!--end::Sidebar-->
 
       <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-          </div>
-          <!--end::Container-->
-        </div>
-        <!--end::App Content Header-->
-        <!--begin::App Content-->
-        <div class="app-content">
-          <section id="lista-productos">
-              <!-- Los productos aparecerán acá -->
-          </section>
-        </div>
-      </main>
+          <main class="app-main">
+
+              <div class="app-content-header">
+                  <div class="container-fluid">
+                  </div>
+              </div>
+
+              <div class="app-content">
+                  <div class="container-fluid">
+
+                      <div class="contenedor-filtros">
+
+                          <div class="filtros-catalogo">
+                              <label for="filtro-categoria">Filtrar por categoría:</label>
+                              <select id="filtro-categoria" onchange="filtrarProductos()">
+                                  <option value="todos">Todas las categorías</option>
+                              </select>
+                          </div>
+
+                          <div class="filtros-catalogo">
+                              <label for="orden-precio">Ordenar por precio:</label>
+                              <select id="orden-precio" onchange="ordenarProductos()">
+                                  <option value="ninguno">Sin ordenar</option>
+                                  <option value="mayor">Mayor a menor</option>
+                                  <option value="menor">Menor a mayor</option>
+                              </select>
+                          </div>
+
+                      </div>
+
+<section id="lista-productos">
+</section>
+
+                  </div>
+              </div>
+
+          </main>
       <!--end::App Main-->
 
 
@@ -333,14 +353,14 @@
       });
     </script>
 
-    <!--end::Script-->
-  </body>
-  <!--end::Body-->
-</html>
-
-<!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+    <!--end::Script-->    
     <script src="../js/adminlte.js"></script>
     <script src="../js/config.js"></script>
     <script src="../js/carrito.js"></script>
     <script src="../js/productos.js"></script>
     <!--end::Required Plugin(AdminLTE)-->
+  </body>
+  <!--end::Body-->
+</html>
+
+<!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->

@@ -1,3 +1,6 @@
+
+let todosLosProductos = [];
+
 async function obtenerProductos() {
     try {
         const respuesta = await fetch(`${API_USERS_PRODUCTS}/products`);
@@ -6,13 +9,34 @@ async function obtenerProductos() {
             throw new Error("Error al obtener los productos");
         }
 
-        const productos = await respuesta.json();
+        todosLosProductos = await respuesta.json();
 
-        mostrarProductos(productos);
+        actualizarFiltroCategorias();
+        mostrarProductos(todosLosProductos);
 
     } catch (error) {
         console.error("Error:", error);
     }
+}
+
+function actualizarFiltroCategorias() {
+    const filtro = document.getElementById("filtro-categoria");
+
+    if (!filtro) return;
+
+    const categorias = [...new Set(
+        todosLosProductos.map(producto => producto.categoria).filter(Boolean)
+    )];
+
+    filtro.innerHTML = '<option value="todos">Todas las categorías</option>';
+
+    categorias.forEach(categoria => {
+        const opcion = document.createElement("option");
+        opcion.value = categoria.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+        opcion.textContent = categoria;
+
+        filtro.appendChild(opcion);
+    });
 }
 
 function mostrarProductos(productos) {
@@ -20,7 +44,9 @@ function mostrarProductos(productos) {
 
     contenedor.innerHTML = "";
 
-    productos.forEach(producto => {
+    const limite = contenedor.dataset.limite;
+    const productosAMostrar = limite ? productos.slice(0, Number(limite)) : productos;
+    productosAMostrar.forEach(producto => {
         const tarjeta = document.createElement("div");
 
         tarjeta.classList.add("tarjeta-producto");
@@ -48,3 +74,65 @@ function mostrarProductos(productos) {
 }
 
 obtenerProductos();
+function filtrarProductos() {
+        ordenarProductos();
+    }
+function ordenarProductos() {
+        const filtroCategoria = document.getElementById("filtro-categoria");
+        const filtroPrecio = document.getElementById("orden-precio");
+
+        const categoria = filtroCategoria ? filtroCategoria.value : "todos";
+        const orden = filtroPrecio ? filtroPrecio.value : "ninguno";
+
+        let productosFiltrados = todosLosProductos.filter(producto => {
+            if (categoria === "todos") {
+                return true;
+            }
+
+            const categoriaProducto = producto.categoria
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .trim();
+
+            return categoriaProducto === categoria;
+        });
+
+        if (orden === "mayor") {
+            productosFiltrados.sort((a, b) => Number(b.precio) - Number(a.precio));
+        }
+
+        if (orden === "menor") {
+            productosFiltrados.sort((a, b) => Number(a.precio) - Number(b.precio));
+        }
+
+        mostrarProductos(productosFiltrados);
+}
+function ordenarProductos() {
+    const orden = document.getElementById("orden-precio").value;
+    const categoria = document.getElementById("filtro-categoria").value;
+
+    let productosFiltrados = todosLosProductos;
+
+    if (categoria !== "todos") {
+        productosFiltrados = todosLosProductos.filter(producto => {
+            const categoriaProducto = producto.categoria
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .trim();
+
+            return categoriaProducto === categoria;
+        });
+    }
+
+    if (orden === "mayor") {
+        productosFiltrados.sort((a, b) => Number(b.precio) - Number(a.precio));
+    }
+
+    if (orden === "menor") {
+        productosFiltrados.sort((a, b) => Number(a.precio) - Number(b.precio));
+    }
+
+    mostrarProductos(productosFiltrados);
+}

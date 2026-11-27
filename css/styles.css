@@ -26,7 +26,7 @@ header a {
 }
 main {
     padding: 40px;
-    text-align: center;
+    text-align: left;
 }
 #lista-productos {
     display: grid;
@@ -34,4 +34,3 @@ main {
     gap: 25px;
     padding: 25px;
 }
-

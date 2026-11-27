@@ -11,6 +11,14 @@ async function cargarProductosAdmin() {
         }
 
         const productos = await respuesta.json();
+        const filtro = document.getElementById("filtro-categoria");
+        const categorias = [...new Set(productos.map(producto => producto.categoria))];
+
+        filtro.innerHTML = '<option value="Todas">Todas las categorías</option>';
+
+        categorias.forEach(categoria => {
+            filtro.innerHTML += `<option value="${categoria}">${categoria}</option>`;
+        });
 
         tabla.innerHTML = "";
 
@@ -18,6 +26,9 @@ async function cargarProductosAdmin() {
             const fila = document.createElement("tr");
 
             fila.innerHTML = `
+                <td>
+                    <input type="checkbox" class="seleccionar-producto" value="${producto.id}">
+                </td>
                 <td>${producto.id}</td>
                 <td>${producto.nombre}</td>
                 <td>${producto.categoria}</td>
@@ -31,7 +42,7 @@ async function cargarProductosAdmin() {
                         Eliminar
                     </button>
                 </td>
-            `;
+            `;  
 
             tabla.appendChild(fila);
         });
@@ -49,6 +60,21 @@ async function cargarProductosAdmin() {
 }
 
 cargarProductosAdmin();
+
+document.getElementById("filtro-categoria").addEventListener("change", function () {
+    const categoriaSeleccionada = this.value;
+    const filas = document.querySelectorAll("#tabla-productos tr");
+
+    filas.forEach(fila => {
+        const categoria = fila.children[3].textContent;
+
+        if (categoriaSeleccionada === "Todas" || categoria === categoriaSeleccionada) {
+            fila.style.display = "";
+        } else {
+            fila.style.display = "none";
+        }
+    });
+});
 
 function mostrarFormulario() {
     document.getElementById("formulario-producto").style.display = "block";
@@ -153,3 +179,44 @@ async function eliminarProducto(id) {
         alert("No se pudo eliminar el producto");
     }
 }
+
+document.getElementById("seleccionar-todos").addEventListener("change", function () {
+    const seleccionados = document.querySelectorAll(".seleccionar-producto");
+
+    seleccionados.forEach(checkbox => {
+        checkbox.checked = this.checked;
+    });
+});
+
+async function eliminarProductosSeleccionados() {
+    const seleccionados = document.querySelectorAll(".seleccionar-producto:checked");
+
+    if (seleccionados.length === 0) {
+        alert("Seleccioná al menos un producto");
+        return;
+    }
+
+    if (!confirm("¿Estás seguro de que querés eliminar los productos seleccionados?")) {
+        return;
+    }
+
+    try {
+        for (const checkbox of seleccionados) {
+            const respuesta = await fetch(`${API_USERS_PRODUCTS}/products/${checkbox.value}`, {
+                method: "DELETE"
+            });
+
+            if (!respuesta.ok) {
+                throw new Error("Error al eliminar un producto");
+            }
+        }
+
+        alert("Productos eliminados correctamente");
+        cargarProductosAdmin();
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("No se pudieron eliminar todos los productos");
+    }
+}
+

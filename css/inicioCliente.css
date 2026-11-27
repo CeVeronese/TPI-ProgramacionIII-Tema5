@@ -12,3 +12,11 @@
 [data-bs-theme="light"] .app-content-header p {
     color: #212529;
 }
+.imagen-banner {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    border-radius: 5px;
+}
