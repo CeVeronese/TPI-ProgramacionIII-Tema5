@@ -109,31 +109,3 @@ function ordenarProductos() {
 
         mostrarProductos(productosFiltrados);
 }
-function ordenarProductos() {
-    const orden = document.getElementById("orden-precio").value;
-    const categoria = document.getElementById("filtro-categoria").value;
-
-    let productosFiltrados = todosLosProductos;
-
-    if (categoria !== "todos") {
-        productosFiltrados = todosLosProductos.filter(producto => {
-            const categoriaProducto = producto.categoria
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .trim();
-
-            return categoriaProducto === categoria;
-        });
-    }
-
-    if (orden === "mayor") {
-        productosFiltrados.sort((a, b) => Number(b.precio) - Number(a.precio));
-    }
-
-    if (orden === "menor") {
-        productosFiltrados.sort((a, b) => Number(a.precio) - Number(b.precio));
-    }
-
-    mostrarProductos(productosFiltrados);
-}
