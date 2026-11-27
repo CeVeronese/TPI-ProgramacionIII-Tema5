@@ -173,8 +173,12 @@
          <aside class="app-sidebar bg-body-secondary shadow">
         <!-- Marca de la barra lateral -->
         <div class="sidebar-brand">
-          <a href="./index.html" class="brand-link">
-            <span class="brand-text fw-bold">TPI Programación III</span>
+          <a href="admin2.html" class="brand-link d-flex align-items-center">
+              <img src="assets/img/logo-sinFondo2.png"
+                  alt="Logo TechnoApp"
+                  style="width: 38px; height: 38px; object-fit: contain; margin-right: 8px;">
+
+              <span class="brand-text fw-light">TechnoApp</span>
           </a>
         </div>
 
@@ -230,23 +234,26 @@
 
       <!--end::Sidebar-->
       <!--begin::App Main-->
+      <!--begin::App Main-->
       <main class="app-main">
             <div class="app-content-header">
                 <div class="container-fluid">
-                    <h1 class="mb-0 fs-3">Mis pedidos</h1>
-                    <p>Consultá y administrá tus compras.</p>
+                    <h1 class="mb-0 fs-3 text-body fw-bold">Mis pedidos</h1>
+                    <p class="text-muted">Consultá y administrá tus compras.</p>
                 </div>
-                </div>
+            </div>
 
-                <div class="app-content">
-                    <div class="container-fluid">
-                        <div class="card">
-                            <div class="card-header">
-                            <h3 class="card-title">Historial de pedidos</h3>
+            <div class="app-content">
+                <div class="container-fluid">
+                    <!-- Agregamos bg-body text-body y border-0 para que se adapte al modo oscuro -->
+                    <div class="card border-0 shadow-sm bg-body text-body">
+                        <div class="card-header bg-transparent border-0 py-3">
+                            <h3 class="card-title fw-bold m-0"><i class="bi bi-box-seam me-2"></i>Historial de pedidos</h3>
                         </div>
-                        <div class="card-body table-responsive">
-                            <table class="table table-hover">
-                                <thead>
+                        <div class="card-body table-responsive p-0">
+                            <!-- Agregamos table-dark opcional o clases de texto para que la tabla sea legible -->
+                            <table class="table table-hover align-middle mb-0 text-body">
+                                <thead class="table-group-divider">
                                     <tr>
                                         <th>N° Pedido</th>
                                         <th>Fecha</th>
@@ -258,7 +265,7 @@
                                 </thead>
                                 <tbody id="lista-pedidos">
                                     <tr>
-                                        <td colspan="6" class="text-center">
+                                        <td colspan="6" class="text-center py-4 text-muted">
                                             Cargando pedidos...
                                         </td>
                                     </tr>
@@ -308,6 +315,8 @@
     <script src="../js/config.js"></script>
     <script src="../js/carrito.js"></script>
     <script src="../js/productos.js"></script>
+    <script src="../js/pedidosUsuario.js"></script>
+    
     <!--end::Required Plugin(AdminLTE)-->
     <!--begin::OverlayScrollbars Configure-->
     <script>
