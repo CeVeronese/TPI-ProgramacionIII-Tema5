@@ -106,3 +106,40 @@
     width: 220px;
     flex-shrink: 0;
 }
+
+.filtros-catalogo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.filtros-catalogo label {
+    font-weight: bold;
+}
+
+.filtros-catalogo select {
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid #555;
+    background: #252525;
+    color: white;
+    cursor: pointer;
+}
+
+[data-bs-theme="light"] .filtros-catalogo select {
+    background: white;
+    color: #222;
+    border-color: #ccc;
+}
+.contenedor-filtros {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.filtros-catalogo {
+    margin: 0;
+}

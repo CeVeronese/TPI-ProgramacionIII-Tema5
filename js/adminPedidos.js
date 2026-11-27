@@ -246,3 +246,4 @@ async function eliminarPedidosSeleccionados() {
         alert("No se pudieron eliminar todos los pedidos");
     }
 }
+
